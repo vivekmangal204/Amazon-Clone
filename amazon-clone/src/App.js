@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
+import Header from './components/Header';
 function App() {
   return (
   //  <h1>Amazon Clone</h1> 
@@ -8,6 +9,7 @@ function App() {
     <Router>
       <Switch>
         <Route path='/'>
+          <Header/>
           <Home />
         </Route>
         {/* <Route path='/cart'>
