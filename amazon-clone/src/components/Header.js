@@ -3,8 +3,10 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import "./Header.css";
 import SearchIcon from '@material-ui/icons/Search'
 import { ShoppingBasket } from '@material-ui/icons'
+import { useStateValue } from '../Providers/StateProvider'
 const theme = createTheme();
 function Header() {
+    const [{ basket, user}, dispatch] = useStateValue();
   return (
     <ThemeProvider theme={theme}>
     <div className='header'>
@@ -39,7 +41,7 @@ function Header() {
 
     <div className='header_optionBasket'>
         <ShoppingBasket /> 
-        <span className='header_optionL2 header_basketCount'> 0 </span>
+        <span className='header_optionL2 header_basketCount'> {basket?.length} </span>
     </div>
 
     </div>
