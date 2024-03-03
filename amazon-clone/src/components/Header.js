@@ -4,9 +4,16 @@ import "./Header.css";
 import SearchIcon from '@material-ui/icons/Search'
 import { ShoppingBasket } from '@material-ui/icons'
 import { useStateValue } from '../Providers/StateProvider'
+import {Link} from 'react-router-dom'
+import { auth } from '../firebase'
 const theme = createTheme();
 function Header() {
     const [{ basket, user}, dispatch] = useStateValue();
+    const handleAuthentication = () => {
+        if(user){
+            auth.signOut();
+        }
+    }
   return (
     <ThemeProvider theme={theme}>
     <div className='header'>
@@ -19,12 +26,14 @@ function Header() {
         <input className='header__searchInput' type='text'/>
         <SearchIcon className='header__searchIcon'/>
     </div>
-
     <div className='header__nav'>
-        <div className='header_option'>
+    <Link to='/login' >
+        <div className='header_option' onClick={handleAuthentication}>
         <span className='header-optionL1'>Hello</span>
         <span className='header-optionL2'>Sign In</span>
         </div>
+    </Link>
+
     </div>
     <div className='header__nav'>
         <div className='header_option'>

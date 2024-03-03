@@ -5,14 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import reducer, { initialState } from './Providers/reducer';
 import { StateProvider  } from './Providers/StateProvider';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <StateProvider initialState={initialState} reducer={reducer}>
-    <App />
+      <Router>
+      <App />
+      </Router>
     </StateProvider>
-  </React.StrictMode>
+  // </React.StrictMode> 
 );
 
 // If you want to start measuring performance in your app, pass a function
