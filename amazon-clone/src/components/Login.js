@@ -3,6 +3,7 @@ import { useState } from 'react'
 import './Login.css'
 import { Link, useHistory } from "react-router-dom"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
+import { useStateValue } from '../Providers/StateProvider';
 
 
 function Login() {
@@ -10,7 +11,7 @@ function Login() {
     const [password, setPassword] = useState('');
 
     const history = useHistory();
-
+    const [{basket,user},dispatch]=useStateValue();
 
 const signIn = e => {
 //code from firebase docs
@@ -20,12 +21,16 @@ signInWithEmailAndPassword(auth, email, password)
     // Signed in 
     const user = userCredential.user;
     console.log("User Signed in :",user);
+    dispatch({
+      type: 'SET_USER',
+      user: user,
+    });
     history.push('/');
   })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-    console.log(errorMessage)
+    window.alert(errorMessage)
   });
 //code end from firebase docs
     }
@@ -38,12 +43,17 @@ signInWithEmailAndPassword(auth, email, password)
         // Signed up 
         const user = userCredential.user;
         console.log("user Signed Up:", user)
+        dispatch({
+          type: 'SET_USER',
+          user: user,
+        });
+
         history.push('/');
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage);
+        window.alert(errorMessage);
       });
 // Code end from Firebase - Docs
     }
@@ -64,8 +74,8 @@ signInWithEmailAndPassword(auth, email, password)
             <input type='email' value={email} onChange={e => setEmail(e.target.value)}/>
             <h5>Password</h5>
             <input type='password' value = {password} onChange = {e => setPassword(e.target.value)}/>
-            <button type='submit' className='login__signInButton' onClick={signIn}>Sign In</button>
         </form>
+        <button className='login__signInButton' onClick={signIn}>Sign In</button>
         <p>By Sign in you Agree to view amazon clone terms and conditions of use off sales Please see our privacy policies, our cookies Notice and our Internet Based Ads Notice</p>
         <button className='login__registerButton' onClick={register}> Create Your Amazon Account</button>
       </div>

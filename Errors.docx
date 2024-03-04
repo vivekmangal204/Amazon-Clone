@@ -1,3 +1,4 @@
 we Have Determined 2 Errors in 6th Lecture
-1st Login Problem
-2nd State Problem (cart ki value reset hojati h refresh karne pr)
+1st Login Problem - Solved : Removed type="submit" from button tag
+and put it outside the from
+2nd State Problem - Solved using map and item.id item.price etc...

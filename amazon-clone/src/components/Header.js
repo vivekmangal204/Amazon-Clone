@@ -27,10 +27,10 @@ function Header() {
         <SearchIcon className='header__searchIcon'/>
     </div>
     <div className='header__nav'>
-    <Link to='/login' >
+    <Link to={!user && '/login'} >
         <div className='header_option' onClick={handleAuthentication}>
-        <span className='header-optionL1'>Hello</span>
-        <span className='header-optionL2'>Sign In</span>
+        <span className='header-optionL1'>Hello {!user ? 'Guest' : user.email}</span>
+        <span className='header-optionL2'>{user?'Sign Out':'Sign In'}</span>
         </div>
     </Link>
 
@@ -48,10 +48,12 @@ function Header() {
         </div>
     </div>
 
+    <Link to='/checkout'>
     <div className='header_optionBasket'>
         <ShoppingBasket /> 
         <span className='header_optionL2 header_basketCount'> {basket?.length} </span>
     </div>
+    </Link>
 
     </div>
     </ThemeProvider>
